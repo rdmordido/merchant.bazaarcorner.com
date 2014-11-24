@@ -1,0 +1,13 @@
+/* custom css added for SB admin Backend */
+.navbar-brand{
+	color:#02365b !important;
+}
+.panel-sgdc{
+	text-align:center;
+	padding:20px 10px;
+}
+.sgcd-logo{
+	color:#02365b !important;
+	font-weight:bold;
+	font-size:30px;
+}
