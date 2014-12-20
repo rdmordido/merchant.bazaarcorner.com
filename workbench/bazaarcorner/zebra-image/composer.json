@@ -1,0 +1,23 @@
+{
+    "name": "bazaarcorner/zebra-image",
+    "description": "",
+    "authors": [
+        {
+            "name": "Robert Mordido",
+            "email": "rdmordido@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Bazaarcorner\\ZebraImage\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

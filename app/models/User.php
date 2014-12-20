@@ -29,11 +29,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @return object
 	 */
-	public function createNewUser($user_data)
+	public function store($user_data)
 	{
 		$new_user = new User;
-		$new_user->first_name 		= (isset($user_data['first_name']) && !empty($user_data['first_name'])) 	? $user_data['first_name'] 	: null;
-		$new_user->last_name 		= (isset($user_data['last_name']) && !empty($user_data['last_name'])) 	? $user_data['last_name'] 	: null;
+		$new_user->role_id 			= $user_data['role_id'];
+		$new_user->first_name 		= (isset($user_data['first_name']) && !empty($user_data['first_name'])) 		? $user_data['first_name'] 	: null;
+		$new_user->last_name 		= (isset($user_data['last_name']) && !empty($user_data['last_name'])) 			? $user_data['last_name'] 	: null;
 		$new_user->username 		= $user_data['username'];
 		$new_user->password 		= (Hash::needsRehash($user_data['password'])) ? Hash::make($user_data['password']) : $user_data['password'];
 		$new_user->email 			= $user_data['email'];
@@ -44,24 +45,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$new_user->profile_image 	= (isset($user_data['profile_image']) && !empty($user_data['profile_image'])) 	? $user_data['profile_image'] 	: null;
 		$new_user->cover_image 		= (isset($user_data['cover_image']) && !empty($user_data['cover_image'])) 		? $user_data['cover_image'] 	: null;
 		$new_user->cover_text 		= (isset($user_data['cover_text']) && !empty($user_data['cover_text']))			? $user_data['cover_text'] 		: null;
-		$new_user->save();
-
-		$user_roles 	= (isset($user_data['user_roles']) && !empty($user_data['user_roles'])) ? $user_data['user_roles'] : 3;
-		$roles 			= array();
-
-		if($new_user->id){
-			if($user_roles && is_array($user_roles)){
-				foreach($user_roles as $role){
-					UserRole::Create(array('user_id'=>$new_user->id,'role_id'=>$user_roles));
-				}
-			}
-			if($user_roles && is_array($user_roles) == false){
-				UserRole::Create(array('user_id'=>$new_user->id,'role_id'=>$user_roles));
-			}
-		return $new_user;
-		}else{
+		if($new_user->save())
+			return $new_user;
+		else
 			return false;
-		}
+	}
+
+	public function edit($user_data){
+		$user 					= User::find($user_data['user_id']);
+		$user->first_name 		= (isset($user_data['first_name']) && !empty($user_data['first_name'])) 		? $user_data['first_name'] 								: null;
+		$user->last_name 		= (isset($user_data['last_name']) && !empty($user_data['last_name'])) 			? $user_data['last_name'] 								: null;
+		$user->username 		= (isset($user_data['username']) && !empty($user_data['username'])) 			? $user_data['username'] 								: $user->username;
+		$user->password 		= (isset($user_data['password']) && !empty($user_data['password'])) 			? Hash::make($user_data['password']) 					: $user->password;
+		$user->email 			= (isset($user_data['email']) && !empty($user_data['email'])) 					? $user_data['email'] 									: $user->email;
+		$user->birthdate 		= (isset($user_data['birthdate']) && !empty($user_data['birthdate'])) 			? date('Y-m-d',strtotime($user_data['birthdate'])) 		: null;
+		$user->phone 			= (isset($user_data['phone']) && !empty($user_data['phone'])) 					? $user_data['phone'] 									: null;
+		$user->profile_image 	= (isset($user_data['profile_image']) && !empty($user_data['profile_image'])) 	? $user_data['profile_image'] 							: null;
+		if($user->save())
+			return $user;
+		else
+			return false;
+	}
+	
+	public function merchant(){
+		return $this->hasOne('Merchant');
 	}
 
 	public function roles(){

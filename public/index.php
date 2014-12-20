@@ -18,8 +18,7 @@
 |
 */
 
-//require __DIR__.'/../bootstrap/autoload.php';
-require '/var/www/html/merchant.bazaarcorner.local/bootstrap/autoload.php';
+require __DIR__.'/../bootstrap/autoload.php';
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights
@@ -32,8 +31,7 @@ require '/var/www/html/merchant.bazaarcorner.local/bootstrap/autoload.php';
 |
 */
 
-//$app = require_once __DIR__.'/../bootstrap/start.php';
-$app = require_once '/var/www/html/merchant.bazaarcorner.local/bootstrap/start.php';
+$app = require_once __DIR__.'/../bootstrap/start.php';
 
 /*
 |--------------------------------------------------------------------------

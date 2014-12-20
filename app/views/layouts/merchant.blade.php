@@ -10,9 +10,18 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/plugins/metisMenu/metisMenu.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/plugins/timeline.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/AdminLTE.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/merchant.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/plugins/morris.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/plugins/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/plugins/JQueryFileUpload/jquery.fileupload.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/plugins/JQueryFileUpload/jquery.fileupload-ui.css"/>
     <link rel="stylesheet" type="text/css" href="/packages/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/packages/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/jvectormap/jquery-jvectormap-1.2.2.css"/>        
+    <link rel="stylesheet" type="text/css" href="/assets/css/fullcalendar/fullcalendar.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/daterangepicker/daterangepicker-bs3.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"/>
     @section('header-css')
     @show
     <link rel="stylesheet" type="text/css" href="/assets/css/custom.css">
@@ -27,7 +36,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px;position:fixed;width:100%">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -35,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Bazaarcorner</a>
+                <a class="navbar-brand" href="/">Bazaarcorner Merchant</a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
@@ -255,27 +264,61 @@
                         <li>
                             <a class="active" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                        <li>
+                            <a class="active" href="javascript:;"><i class="ion ion-bag"></i> Items</a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/item">Manage Items</a></li>
+                                <li><a href="/item/create">Create New Item</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="active" href="javascript:;"><i class="ion ion-pricetags"></i> Discounts</a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/discount">Manage Discounts</a></li>
+                                <li><a href="/discount/create">Create New Discount</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="active" href="/page"><i class="ion ion-android-globe"></i> Merchant Page</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="padding-top:30px;">
             @yield('content')
         </div>
         <!-- /#page-wrapper -->
+        <div id="bc-merchant-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
     </div>
 
     <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.ui.widget.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/plugins/metisMenu/metisMenu.min.js"></script>
-    <script src="/assets/js/plugins/morris/raphael.min.js"></script>
-    <script src="/assets/js/plugins/morris/morris.min.js"></script>
+    <script src="/assets/js/merchant.js"></script>
     @section('footer-js')
     @show
-    <script src="/assets/js/merchant.js"></script>
 </body>
 
 </html>
