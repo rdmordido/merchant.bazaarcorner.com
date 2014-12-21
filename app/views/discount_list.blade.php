@@ -21,8 +21,8 @@
                                 <th style="width:10%"></th>
                                 <th style="width:40%">Title</th>
                                 <th style="width:10%">Items</th>
-                                <th style="width:10%">Active</th>
-                                <th style="width:30%;"></th>
+                                <th style="width:5%">Active</th>
+                                <th style="width:35%;"></th>
                             </tr>
                         </thead>
                         <tbody>

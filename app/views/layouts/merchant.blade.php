@@ -279,6 +279,9 @@
                             </ul>
                         </li>
                         <li>
+                            <a class="active" href="/followers"><i class="ion-ios-people-outline"></i> Followers</a>
+                        </li>
+                        <li>
                             <a class="active" href="/page"><i class="ion ion-android-globe"></i> Merchant Page</a>
                         </li>
                     </ul>

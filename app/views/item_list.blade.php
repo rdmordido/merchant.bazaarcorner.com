@@ -24,7 +24,7 @@
                                 <th>Brand</th>
                                 <th>Main Category</th>
                                 <th>Sub Category</th>
-                                <th style="width:165px;"></th>
+                                <th style="text-align:center;width:210px;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,15 +38,9 @@
                                 <td>{{$item->sub_category->name}}</td>
                                 <td class="center">
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                          Actions
-                                          <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                          <li><a class="btn-view-item-details" item-id="{{$item->id}}" href="javascript:;" data-toggle="modal" data-target="#bc-merchant-modal">View Details</a></li>
-                                          <li><a href="/item/{{$item->id}}/edit">Update</a></li>
-                                          <li><a class="btn-remove-item" item-id="{{$item->id}}" href="javascript:;">Remove</a></li>
-                                        </ul>
+                                        <button type="button" class="btn btn-sm btn-default btn-view-item-details" item-id="{{$item->id}}" data-toggle="modal" data-target="#bc-merchant-modal"><i class="fa fa-search"></i> View</button>
+                                        <button type="button" class="btn btn-sm btn-default" onClick="window.location='{{url("item/$item->id/edit")}}'"><i class="fa fa-edit"></i> Update</button>
+                                        <button type="button" class="btn btn-sm btn-default btn-remove-item" item-id="{{$item->id}}"><i class="fa fa-trash-o"></i> Remove</button>
                                     </div>
                                 </td>
                             </tr>
