@@ -71,8 +71,6 @@ var bc_fileupload = function(){
         }).prop('disabled', !$.support.fileInput)
             .parent().addClass($.support.fileInput ? undefined : 'disabled');
 
-    }
-
     $('#upload-discount-image').fileupload({
             dataType        : 'json',
             autoUpload      : true,
@@ -96,12 +94,45 @@ var bc_fileupload = function(){
             $.each(data.result.files, function (index, file) {
                 if(file.url){
                     $('#discount-image-new').val(file.name);
-                    $('#discount-image-preview').attr('src',file.thumbnailUrl)
+                    $('#discount-image-preview').attr('src',file.thumbnailUrl);
                 }
             });
 
         });
 
+    $('#upload-profile-image').fileupload({
+            dataType        : 'json',
+            autoUpload      : true,
+            acceptFileTypes : /(\.|\/)(gif|jpe?g|png)$/i,
+            maxFileSize     : 5000000, // 5 MB
+            previewMaxWidth : 100,
+            previewMaxHeight: 100,
+            previewCrop     : true
+        }).on('fileuploadprogressall',function(e,data){
+            
+                $('#fileupload-progress').show();
+                var progress    = parseInt(data.loaded / data.total * 100, 10);
+                $('#fileupload-progress .progress-bar').css('width',progress + '%');
+                
+                if(progress == 100){
+                    $('#fileupload-progress').hide();
+                    $('#fileupload-progress .progress-bar').css('width','0%');  
+                }
+        }).on('fileuploaddone',function(e,data){
+
+            $.each(data.result.files, function (index, file) {
+                if(file.url){
+                    $('#profile_image').val(file.name);
+                    $('#profile-image-preview').attr('src',file.thumbnailUrl)
+                    $('#delete-profile-image').attr('delete-url',file.deleteUrl);
+                    $('#delete-profile-image').show();
+                    $('#upload-profile-image').parent().find('span').text('Replace Image');
+                }
+            });
+
+        });
+
+    }  
     this.init_fileupload_actions = function(){
 
         $('.btn-delete-fileupload').click(function(){
@@ -150,6 +181,36 @@ var bc_fileupload = function(){
 
         $('#btn-remove-discount-image').click(function(){
             $('#discount_image').val('');
+        });
+
+        $('#delete-profile-image').click(function(){
+
+            $.ajax({
+                url     : $(this).attr('delete-url'),
+                type    : 'DELETE',
+                success : function(data){
+                    $('#profile_image').val('');
+                    $('#profile-image-preview').attr('src','');
+                    $('#delete-profile-image').attr('delete-url','');
+                    $('#delete-profile-image').hide();
+                    $('#upload-profile-image').parent().find('span').text('Upload Image');
+
+
+                            var user_id = $('#user_id').val();
+                            $.ajax({
+                                type    : 'put',
+                                url     : '/profile_image',
+                                data    : {
+                                            user_id         : $('#user_id').val(),
+                                            profile_image   : $('#profile_image').val()
+                                },
+                                dataType: 'json',
+                                success : function(result){
+                                }
+                            });
+                           
+                }
+            });
         });
     }
 

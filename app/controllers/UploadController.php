@@ -32,6 +32,13 @@ class UploadController extends BaseController {
 		    		,'script_url' => $this->script_url.'discount/'
 		    	);
     			break;
+    		case 'profile':
+    			$options = array(
+		    		 'upload_dir' => $this->upload_path.'profile/'
+		    		,'upload_url' => $this->upload_url.'profile/'
+		    		,'script_url' => $this->script_url.'profile/'
+		    	);
+    			break;
     		default:
     			# code...
     			break;

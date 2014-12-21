@@ -52,7 +52,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function edit($user_data){
-		$user 					= User::find($user_data['user_id']);
+		$user 						= User::find($user_data['user_id']);
 		$user->first_name 		= (isset($user_data['first_name']) && !empty($user_data['first_name'])) 		? $user_data['first_name'] 								: null;
 		$user->last_name 		= (isset($user_data['last_name']) && !empty($user_data['last_name'])) 			? $user_data['last_name'] 								: null;
 		$user->username 		= (isset($user_data['username']) && !empty($user_data['username'])) 			? $user_data['username'] 								: $user->username;
@@ -60,7 +60,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$user->email 			= (isset($user_data['email']) && !empty($user_data['email'])) 					? $user_data['email'] 									: $user->email;
 		$user->birthdate 		= (isset($user_data['birthdate']) && !empty($user_data['birthdate'])) 			? date('Y-m-d',strtotime($user_data['birthdate'])) 		: null;
 		$user->phone 			= (isset($user_data['phone']) && !empty($user_data['phone'])) 					? $user_data['phone'] 									: null;
-		$user->profile_image 	= (isset($user_data['profile_image']) && !empty($user_data['profile_image'])) 	? $user_data['profile_image'] 							: null;
+		$user->profile_image 	= (isset($user_data['profile_image']) && !empty($user_data['profile_image']) && $user_data['profile_image'] != $user->profile_image) 	? $user_data['profile_image'] : null;
 		if($user->save())
 			return $user;
 		else

@@ -97,21 +97,24 @@
 	                        </div>
 	                    </td>
 	                </tr>
-	                
 	                <tr>
 	                    <td style="vertical-align:middle;"><label>Profile Image</label></td>
 	                    <td>
 	                    	<div class="form-group" style="margin:0px;">
 	                            <label style="display:none;" class="control-label" for="profile_image"></label>
-	                            <input type="hidden" id="profile_image" name="profile_image" value=""/>
+	                            <input type="hidden" id="profile_image" name="profile_image" value="{{Auth::user()->profile_image}}"/>	                            
 	                        </div>
-	                        <div style="margin-bottom:10px;position:relative;">
-	                            <span class="btn btn-success btn-sm fileinput-button"><i class="glyphicon glyphicon-plus"></i><span>Upload an image...</span>
-									<input id="upload_profile_image" type="file" name="file" data-url="<?=URL::to('/upload/profile')?>" style="cursor:pointer;">
+	                        <div style="position:relative;">
+	                            <span class="btn btn-success btn-sm fileinput-button"><i class="glyphicon glyphicon-upload"></i><span>&nbsp;{{ (Auth::user()->profile_image == '')  ? 'Upload Image' : 'Replace Image' }}</span>
+									<input id="upload-profile-image" type="file" data-url="<?=URL::to('/upload/profile')?>" style="cursor:pointer;">
 								</span>
+								<button id="delete-profile-image" type="button" class="btn btn-sm btn-danger delete" delete-url="{{ (Auth::user()->profile_image == '') ? '' : '/upload/profile/?file='.Auth::user()->profile_image }} " style="{{ (Auth::user()->profile_image == '') ? 'display:none;' : '' }} cursor:pointer;">
+                    				<i class="glyphicon glyphicon-trash"></i>
+                    				<span>Delete</span>
+                    			</button>
 							</div>
                             <div id="fileupload-progress" class="progress" style="display:none;"><div class="progress-bar progress-bar-success"></div></div>
-	                        <table id="uploaded_images" role="presentation" class="table table-striped"></table>
+							<img id="profile-image-preview" src="@if(Auth::user()->profile_image != '') {{getUploadedImageUrl('profile',Auth::user()->profile_image)->thumbUrl}} @endif"/>
 	                    </td>
 	                </tr>
                 	<tr><td colspan="2" style="text-align:center;"><button type="submit" class="btn btn-primary">Update</button></td></tr>

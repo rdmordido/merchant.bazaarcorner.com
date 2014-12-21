@@ -97,14 +97,15 @@ class UserController extends BaseController {
 					,'birthdate' 			=> (isset($data['birthdate'])) 				? $data['birthdate'] 		: ''
 					,'email' 				=> (isset($data['email'])) 					? $data['email'] 			: ''
 					,'phone' 				=> (isset($data['phone'])) 					? $data['phone'] 			: ''
+					,'profile_image' 		=> (isset($data['profile_image'])) 			? $data['profile_image'] 	: ''
 			);
 		$validator = Validator::make(
 			$user_data,
 			array(
-					 'username' 			=> ($data['username'] != $user->username) 					? 'required|unique:user' 	: 'required'
-					,'password' 			=> ($data['password'] != '') 								? 'required|confirmed' 		: ''
-					,'password_confirmation'=> ($data['password'] != '') 								? 'required' 				: ''
-					,'email' 				=> ($data['email'] != '' && $data['email'] != $user->email) ? 'required|unique:user' 	: 'required'
+					 'username' 			=> (isset($data['username']) && $data['username'] != $user->username) 					? 'required|unique:user' 	: 'required'
+					,'password' 			=> (isset($data['password']) && $data['password'] != '') 								? 'required|confirmed' 		: ''
+					,'password_confirmation'=> (isset($data['password']) && $data['password'] != '') 								? 'required' 				: ''
+					,'email' 				=> (isset($data['email']) && $data['email'] != '' && $data['email'] != $user->email) 	? 'required|unique:user' 	: 'required'
 			),
 			array(
 					 'username.required' 		=> 'Username is required'
@@ -135,6 +136,20 @@ class UserController extends BaseController {
 				,'email' 				=> ($messages->has('email')) 			? $messages->first('email') 			: false
 			);
 			echo json_encode(array('success'=>false,'error_message'=>$error_messages));
+		}
+	}
+
+	public function update_profile_image(){
+		$data 			= Input::get();
+		$user_id 		= (isset($data['user_id']) && !empty($data['user_id'])) ? $data['user_id'] : false;
+		$profile_image 	= (isset($data['profile_image']) && !empty($data['profile_image'])) ? $data['profile_image'] : null;
+		if($user_id){
+			$user = User::find($user_id);
+			$user->profile_image = $profile_image;
+			$user->save();
+			return true;
+		}else{
+			return false;
 		}
 	}
 

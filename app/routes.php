@@ -20,6 +20,7 @@ Route::group(array('before' => 'auth'), function()
     Route::get('/','MerchantController@dashboard');
     Route::get('profile','UserController@profile');
     Route::put('user/{id}','UserController@update');
+    Route::put('profile_image','UserController@update_profile_image');
     Route::resource('item', 'ItemController');
     Route::resource('category', 'CategoryController');
     Route::resource('discount', 'DiscountController');

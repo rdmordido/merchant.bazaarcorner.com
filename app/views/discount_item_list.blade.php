@@ -51,6 +51,13 @@
                     </tr>
                 </table>
 
+                <div class="margin">
+                    <button type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Items</button>
+                    <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> Deactivate</button>
+                    <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Remove</button>
+                    <button type="button" class="btn btn-sm btn-default"><i class="fa fa-edit"></i> Update Details</button>
+                </div>
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
