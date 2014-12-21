@@ -25,15 +25,8 @@ Route::group(array('before' => 'auth'), function()
     Route::resource('category', 'CategoryController');
     Route::resource('discount', 'DiscountController');
     Route::get('/discount/{id}/items','DiscountController@items');
-    Route::resource('page', 'PageController');
-    /*
-    Route::get('item/getItemDetails/{id}',function($id){
-    	$item = new Item;
-    	$item_details = $item->getItemDetails($id);
-    	printpre($item_details->images());
-    	//return Response::view('modal_item_details',array('item'=>$item->getItemDetails($id)));
-    });
-    */
+    Route::controller('follower','FollowerController');
+    Route::controller('page', 'PageController');
 });
 
 /*JQuery Fileupload*/
