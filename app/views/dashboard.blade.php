@@ -136,7 +136,7 @@
                 </div>
                 <i class="fa fa-map-marker"></i>
                 <h3 class="box-title">
-                    Visitors
+                    Followers
                 </h3>
             </div>
             <div class="box-body no-padding">
@@ -146,7 +146,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th>Country</th>
-                            <th>Visitors</th>
+                            <th>Followers</th>
                             <th>Online</th>
                             <th>Page Views</th>
                         </tr>
