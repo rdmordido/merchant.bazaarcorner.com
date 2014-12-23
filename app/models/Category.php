@@ -11,36 +11,28 @@ class Category extends Eloquent{
 
 	public function getCategories(){
 		$category_list = Category::selectRaw('id,name')
-						->whereRaw('is_active = 1')
+						->where('is_active',1)
 						->orderBy('name','ASC')
 						->get();
 	}
 
 	public function getMainCategories(){
-		$main_categories = Category::selectRaw('id,name')
-						->whereRaw('parent_id = 0 and is_active = 1')
-						->orderBy('name','ASC')
-						->get();
-		if(count($main_categories) > 0){
-			
-			foreach($main_categories as $index=>$category):
-				$main_categories[$index]['child_categories'] = $this->getSubCategories($category['id']);
-			endforeach;
-
-			return $main_categories;
-		}else{
-			return false;
-		}
+		return Category::MainCategory()->orderBy('name','ASC')->get();
 	}
 
 	public function getSubCategories($id){
 		return Category::selectRaw('id,name')
-						->whereRaw('parent_id = ? and is_active = 1',array($id))
+						->where('parent_id',$id)
+						->where('is_active',1)
 						->orderBy('name','ASC')
-						->get();	
+						->get();
 	}
 
 	public function getCategoryDetails($id){
 		return Category::find($id);	
+	}
+
+	public function scopeMainCategory($query){
+		return $query->where('parent_id',0)->where('is_active',1);
 	}
 }
