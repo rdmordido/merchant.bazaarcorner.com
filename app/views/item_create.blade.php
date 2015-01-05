@@ -26,7 +26,7 @@
 	                    <td>
 	                        <div class="form-group" style="margin:0px;">
 	                            <label style="display:none;" class="control-label" for="item_name">Item name is required</label>
-	                            <input id="item_name" name="item_name" class="form-control"/>
+	                            <input id="item_name" name="item_name" class="form-control" style="text-align:left;"/>
 	                        </div>
 	                    </td>
 	                </tr>
@@ -34,8 +34,13 @@
 	                    <td style="vertical-align:middle;"><label>Price</label></td>
 	                    <td>
 	                        <div class="form-group" style="margin:0px;">
-	                            <label style="display:none;" class="control-label" for="item_price">Price is required</label>
-	                            <input id="item_price" name="item_price" class="form-control"/>
+	                        	<label style="display:none;" class="control-label" for="item_price">Price is required</label>
+	                            <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-dollar"></i>
+                                    </div>
+                                    <input id="item_price" name="item_price" class="form-control">
+                                </div>
 	                        </div>
 	                    </td>
 	                </tr>
@@ -119,8 +124,25 @@
 							</table>
 	                    </td>
 	                </tr>
-
-
+	                <tr>
+	                    <td style="vertical-align:middle;"><label>Upload Video</label></td>
+	                    <td>
+	                        <div class="form-group" style="margin:0px;">
+	                            <label style="display:none;" class="control-label" for="profile_image"></label>
+	                            <input type="hidden" id="profile_image" name="profile_image" value="{{Auth::user()->profile_image}}"/>	                            
+	                        </div>
+	                        <div style="position:relative;">
+	                            <span class="btn btn-success btn-sm fileinput-button"><i class="glyphicon glyphicon-upload"></i><span>&nbsp;Add Video</span>
+									<input id="upload-item-video" type="file" data-url="<?=URL::to('/upload/item_video')?>" style="cursor:pointer;">
+								</span>
+								<button id="delete-item-video" type="button" class="btn btn-sm btn-danger delete" style="cursor:pointer;display:none;">
+                    				<i class="glyphicon glyphicon-trash"></i>
+                    				<span>Delete</span>
+                    			</button>
+							</div>
+                            <div id="fileupload-progress" class="progress" style="display:none;"><div class="progress-bar progress-bar-success"></div></div>
+							<img id="item-video-preview" src=""/>
+	                </tr>
                 	<tr><td colspan="2" style="text-align:center;"><button type="submit" class="btn btn-primary">Create New Item</button></td></tr>
                 </table>
             </div>
@@ -132,6 +154,8 @@
 @stop
 
 @section('footer-js')
+<script src="/assets/js/plugins/input-mask/jquery.inputmask.bundle.js"></script>
+
 <script src="/assets/js/plugins/JQueryFileUpload/jquery.fileupload.js"></script>
 <script src="/assets/js/plugins/JQueryFileUpload/jquery.iframe-transport.js"></script>
 <script src="/assets/js/plugins/JQueryFileUpload/jquery.fileupload-process.js"></script>
@@ -142,4 +166,8 @@
 <script src="/assets/js/plugins/JQueryFileUpload/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
 <script src="/assets/js/fileupload.js"></script>
+
+<script type="text/javascript">
+$("#item_price").inputmask({alias:'currency'});
+</script>
 @stop

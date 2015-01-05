@@ -25,6 +25,13 @@ class UploadController extends BaseController {
 		    		,'script_url' => $this->script_url.'item/'
 		    	);
     			break;
+    		case 'item_video':
+    			$options = array(
+		    		 'upload_dir' => $this->upload_path.'item/video/'
+		    		,'upload_url' => $this->upload_url.'item/video/'
+		    		,'script_url' => $this->script_url.'item/video/'
+		    	);
+    			break;
     		case 'discount':
     			$options = array(
 		    		 'upload_dir' => $this->upload_path.'discount/'

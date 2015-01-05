@@ -41,8 +41,13 @@
 	                    <td style="vertical-align:middle;"><label>Price</label></td>
 	                    <td>
 	                        <div class="form-group" style="margin:0px;">
-	                            <label style="display:none;" class="control-label" for="item_price">Price is required</label>
-	                            <input id="item_price" name="item_price" class="form-control" value="{{$item->price}}"/>
+	                        	<label style="display:none;" class="control-label" for="item_price">Price is required</label>
+	                            <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-dollar"></i>
+                                    </div>
+                                    <input id="item_price" name="item_price" class="form-control" value="{{$item->price}}"/>
+                                </div>
 	                        </div>
 	                    </td>
 	                </tr>
@@ -150,7 +155,20 @@
 							</table>
 	                    </td>
 	                </tr>
-
+	                <tr>
+	                    <td style="vertical-align:middle;"><label>Upload Video</label></td>
+	                    <td>
+	                        <div style="margin-bottom:10px;position:relative;">
+	                            <span class="btn btn-success btn-sm fileinput-button"><i class="glyphicon glyphicon-plus"></i><span>Add Video...</span>
+									<input id="upload_item_video" type="file" name="files[]" multiple data-url="<?=URL::to('/upload/item')?>" style="cursor:pointer;">
+								</span>
+							</div>
+							<div id="item-video-error" class="alert alert-danger alert-dismissable" style="display:none;"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong></strong></div>
+                            <div id="fileupload-progress" class="progress" style="display:none;"><div class="progress-bar progress-bar-success"></div></div>
+                            <table id="uploaded_item_video" role="presentation" class="table table-striped">
+							</table>
+	                    </td>
+	                </tr>
 
                 	<tr><td colspan="2" style="text-align:center;"><button type="submit" class="btn btn-primary">Update Item Details</button></td></tr>
                 </table>

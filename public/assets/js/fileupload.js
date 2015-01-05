@@ -71,6 +71,38 @@ var bc_fileupload = function(){
         }).prop('disabled', !$.support.fileInput)
             .parent().addClass($.support.fileInput ? undefined : 'disabled');
 
+    $('#upload-item-video').fileupload({
+            dataType        : 'json',
+            autoUpload      : true,
+            acceptFileTypes : /(\.|\/)(mp4|avi|flv|mov|wmv)$/i,
+            maxFileSize     : 25000000, // 5 MB
+            previewMaxWidth : 100,
+            previewMaxHeight: 100,
+            previewCrop     : true
+        }).on('fileuploadprogressall',function(e,data){
+            
+                $('#fileupload-progress').show();
+                var progress    = parseInt(data.loaded / data.total * 100, 10);
+                $('#fileupload-progress .progress-bar').css('width',progress + '%');
+                
+                if(progress == 100){
+                    $('#fileupload-progress').hide();
+                    $('#fileupload-progress .progress-bar').css('width','0%');  
+                }
+        }).on('fileuploaddone',function(e,data){
+
+            $.each(data.result.files, function (index, file) {
+                if(file.url){
+                    $('#item_video').val(file.name);
+                    $('#item-video-preview').attr('src',file.thumbnailUrl)
+                    $('#delete-item-video').attr('delete-url',file.deleteUrl);
+                    $('#delete-item-video').show();
+                    $('#upload-item-video').parent().find('span').text('Replace Video');
+                }
+            });
+
+        });
+
     $('#upload-discount-image').fileupload({
             dataType        : 'json',
             autoUpload      : true,

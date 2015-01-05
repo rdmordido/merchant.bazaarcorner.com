@@ -102,7 +102,7 @@ var bc_merchant = function(){
                     }else{
                         $('#create-item-success').hide();
                         if(result.error_message.name)               { self.show_form_group_error('item_name',result.error_message.name); }
-                        if(result.error_message.price)              { self.show_form_group_error('item_price',result.error_message.price); }
+                        if(result.error_message.price)              { $('#item_price').parent().parent().addClass('has-error');$('#item_price').parent().parent().find('label').text(result.error_message.price);$('#item_price').parent().parent().find('label').show(); }
                         if(result.error_message.description)        { self.show_form_group_error('item_description',result.error_message.description); }
                         if(result.error_message.brand_id)           { self.show_form_group_error('item_brand',result.error_message.brand_id); }
                         if(result.error_message.item_main_category) { self.show_form_group_error('item_main_category',result.error_message.item_main_category); }
@@ -132,7 +132,7 @@ var bc_merchant = function(){
                     }else{
                         $('#update-item-success').hide();
                         if(result.error_message.name)               { self.show_form_group_error('item_name',result.error_message.name); }
-                        if(result.error_message.price)              { self.show_form_group_error('item_price',result.error_message.price); }
+                        if(result.error_message.price)              { $('#item_price').parent().parent().addClass('has-error');$('#item_price').parent().parent().find('label').text(message);$('#item_price').parent().parent().find('label').show(); }
                         if(result.error_message.description)        { self.show_form_group_error('item_description',result.error_message.description); }
                         if(result.error_message.brand_id)           { self.show_form_group_error('item_brand',result.error_message.brand_id); }
                         if(result.error_message.item_main_category) { self.show_form_group_error('item_main_category',result.error_message.item_main_category); }
