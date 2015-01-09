@@ -21,6 +21,8 @@ use DebugBar\DataCollector\PhpInfoCollector;
 use DebugBar\DataCollector\RequestDataCollector;
 use DebugBar\DataCollector\TimeDataCollector;
 use DebugBar\DebugBar;
+use DebugBar\Storage\PdoStorage;
+use DebugBar\Storage\RedisStorage;
 use Exception;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +50,7 @@ class LaravelDebugbar extends DebugBar
      * @var \Illuminate\Foundation\Application
      */
     protected $app;
-    
+
     /**
      * Normalized Laravel Version
      *
@@ -72,11 +74,7 @@ class LaravelDebugbar extends DebugBar
             $app = app();   //Fallback when $app is not given
         }
         $this->app = $app;
-        
-        //Normalize Laravel version
-        $version = $app::VERSION;
-        list($version) = explode('-', $version);
-        $this->version = $version;
+        $this->version = $app::VERSION;
     }
 
     /**
@@ -108,11 +106,7 @@ class LaravelDebugbar extends DebugBar
         /** @var \Illuminate\Foundation\Application $app */
         $app = $this->app;
 
-        if ($this->app['config']->get('laravel-debugbar::config.storage.enabled')) {
-            $path = $this->app['config']->get('laravel-debugbar::config.storage.path');
-            $storage = new FilesystemStorage($this->app['files'], $path);
-            $debugbar->setStorage($storage);
-        }
+        $this->selectStorage($debugbar);
 
         if ($this->shouldCollect('phpinfo', true)) {
             $this->addCollector(new PhpInfoCollector());
@@ -132,8 +126,8 @@ class LaravelDebugbar extends DebugBar
                 }
             );
 
-            //Check if App::before is already called.. 
-            if ($this->checkVersion('4.1') && $this->app->isBooted()) {
+            //Check if App::before is already called..
+            if ($this->checkVersion('4.1-dev', '>=') && $this->app->isBooted()) {
                 $debugbar->startMeasure('application', 'Application');
             } else {
                 $this->app['router']->before(
@@ -160,12 +154,12 @@ class LaravelDebugbar extends DebugBar
                     $this->app['config']->get('laravel-debugbar::config.options.exceptions.chain', true)
                 );
                 $this->addCollector($exceptionCollector);
-                if ($this->checkVersion('5.0', '<')) {
-	                $this->app->error(
-	                    function (Exception $exception) use ($exceptionCollector) {
-	                        $exceptionCollector->addException($exception);
-	                    }
-	                );
+                if ($this->checkVersion('5.0-dev', '<')) {
+                    $this->app->error(
+                        function (Exception $exception) use ($exceptionCollector) {
+                            $exceptionCollector->addException($exception);
+                        }
+                    );
                 }
             } catch (\Exception $e) {
             }
@@ -216,7 +210,7 @@ class LaravelDebugbar extends DebugBar
 
         if ($this->shouldCollect('route')) {
             try {
-                if ($this->checkVersion('4.1')) {
+                if ($this->checkVersion('4.1', '>=')) {
                     $this->addCollector($this->app->make('Barryvdh\Debugbar\DataCollector\IlluminateRouteCollector'));
                 } else {
                     $this->addCollector($this->app->make('Barryvdh\Debugbar\DataCollector\SymfonyRouteCollector'));
@@ -288,7 +282,7 @@ class LaravelDebugbar extends DebugBar
             if ($this->app['config']->get('laravel-debugbar::config.options.db.backtrace')) {
                 $queryCollector->setFindSource(true);
             }
-            
+
             if ($this->app['config']->get('laravel-debugbar::config.options.db.explain.enabled')) {
                 $types = $this->app['config']->get('laravel-debugbar::config.options.db.explain.types');
                 $queryCollector->setExplainSource(true, $types);
@@ -524,7 +518,7 @@ class LaravelDebugbar extends DebugBar
             }
         } elseif (
             ($response->headers->has('Content-Type') and
-            strpos($response->headers->get('Content-Type'), 'html') === false)
+                strpos($response->headers->get('Content-Type'), 'html') === false)
             || 'html' !== $request->format()
         ) {
             try {
@@ -751,7 +745,7 @@ class LaravelDebugbar extends DebugBar
             $collector->addMessage($message, $label);
         }
     }
-    
+
     /**
      * Check the version of Laravel
      *
@@ -761,6 +755,37 @@ class LaravelDebugbar extends DebugBar
      */
     protected function checkVersion($version, $operator = ">=")
     {
-    	return version_compare($this->version, $version, $operator);
+        return version_compare($this->version, $version, $operator);
+    }
+
+    /**
+     * @param DebugBar $debugbar
+     */
+    protected function selectStorage(DebugBar $debugbar)
+    {
+        $config = $this->app['config'];
+        if ($config->get('laravel-debugbar::config.storage.enabled')) {
+            $driver = $config->get('laravel-debugbar::config.storage.driver', 'file');
+
+            switch ($driver) {
+                case 'pdo':
+                    $connection = $config->get('laravel-debugbar::config.storage.connection');
+                    $table = $this->app['db']->getTablePrefix() . 'phpdebugbar';
+                    $pdo = $this->app['db']->connection($connection)->getPdo();
+                    $storage = new PdoStorage($pdo, $table);
+                    break;
+                case 'redis':
+                    $connection = $config->get('laravel-debugbar::config.storage.connection');
+                    $storage = new RedisStorage($this->app['redis']->connection($connection));
+                    break;
+                case 'file':
+                default:
+                    $path = $config->get('laravel-debugbar::config.storage.path');
+                    $storage = new FilesystemStorage($this->app['files'], $path);
+                    break;
+            }
+
+            $debugbar->setStorage($storage);
+        }
     }
 }
