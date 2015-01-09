@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('myubuntu'),
+	'local' => array('myubuntu','EVSI-MKT-LTX01'),
 	'staging' => array('RSBCDEV'),
 
 ));
