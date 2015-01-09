@@ -13,12 +13,12 @@ class CreateCategoriesTable extends Migration {
 	public function up()
 	{
 		Schema::create('categories',function($table){
-			$table->increments('id');
-			$table->string('name')->unique();
-			$table->integer('parent_id')->length(10)->unsigned();
+			$table->string('id');
+			$table->string('name');
+			$table->string('parent_id')->nullable()->default('None');
 			$table->integer('is_active')->default(1);
 			$table->timestamps();
-			$table->foreign('parent_id')->references('id')->on('categories');
+			$table->primary('id');
 		});
 	}
 

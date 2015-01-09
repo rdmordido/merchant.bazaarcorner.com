@@ -33,6 +33,6 @@ class Category extends Eloquent{
 	}
 
 	public function scopeMainCategory($query){
-		return $query->where('parent_id',0)->where('is_active',1);
+		return $query->where('parent_id',null)->where('is_active',1);
 	}
 }

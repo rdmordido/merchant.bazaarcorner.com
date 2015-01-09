@@ -14,7 +14,7 @@ class CreateItemCategoriesTable extends Migration {
 	{
 		Schema::create('item_categories',function($table){
 			$table->integer('item_id')->length(10)->unsigned();
-			$table->integer('category_id')->length(10)->unsigned();
+			$table->string('category_id');
 			$table->integer('is_primary')->default(0);
 			$table->timestamps();
 			$table->foreign('category_id')->references('id')->on('categories');

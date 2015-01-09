@@ -124,6 +124,7 @@
 							</table>
 	                    </td>
 	                </tr>
+	                <?php /*
 	                <tr>
 	                    <td style="vertical-align:middle;"><label>Upload Video</label></td>
 	                    <td>
@@ -143,6 +144,7 @@
                             <div id="fileupload-progress" class="progress" style="display:none;"><div class="progress-bar progress-bar-success"></div></div>
 							<img id="item-video-preview" src=""/>
 	                </tr>
+	                */ ?>
                 	<tr><td colspan="2" style="text-align:center;"><button type="submit" class="btn btn-primary">Create New Item</button></td></tr>
                 </table>
             </div>
