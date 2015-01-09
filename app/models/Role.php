@@ -2,7 +2,7 @@
 
 class Role extends Eloquent{
 	
-	protected $table = 'role';
+	protected $table = 'roles';
  	
  	public function users()
     {

@@ -2,7 +2,7 @@
 
 class Discount extends Eloquent{
 
-	protected $table 		= 'discount';
+	protected $table 		= 'discounts';
 	protected $primaryKey 	= 'id';
 	protected $hidden 		= array(
 									'created_at'

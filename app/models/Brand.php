@@ -2,7 +2,7 @@
 
 class Brand extends Eloquent{
 
-	protected $table 		= 'brand';
+	protected $table 		= 'brands';
 	protected $primaryKey 	= 'id';
 	protected $hidden 		= array(
 									'created_at'

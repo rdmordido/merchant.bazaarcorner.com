@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('RoleTableSeeder');
 		$this->call('UserTableSeeder');
+		$this->call('MerchantTableSeeder');
 	}
 
 }
@@ -37,10 +38,23 @@ class UserTableSeeder extends seeder {
 		DB::table('users')->insert(array(
 			array(
 				 'id' 		=> 1
-				,'role_id' 	=> 1
+				,'role_id' 	=> 2
 				,'username' => 'bazaarcorner'
 				,'password' => Hash::make('password')
 				,'email' 	=> 'admin@bazaarcorner.com'
+			)
+		));
+	}
+}
+
+class MerchantTableSeeder extends seeder {
+	public function run(){
+		DB::table('merchants')->delete();
+		DB::table('merchants')->insert(array(
+			array(
+				 'id' 		=> 1
+				,'user_id' 	=> 1
+				,'name' => 'bazaarcorner'
 			)
 		));
 	}

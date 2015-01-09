@@ -2,7 +2,7 @@
 
 class Merchant extends Eloquent{
 
-	protected $table 		= 'merchant';
+	protected $table 		= 'merchants';
 	protected $primaryKey 	= 'id';
 	protected $hidden 		= array(
 									'created_at'

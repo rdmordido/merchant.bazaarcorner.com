@@ -7,7 +7,7 @@ class ItemImage extends Eloquent{
 	 *
 	 * @var string
 	 */
-	protected $table 		= 'item_image';
+	protected $table 		= 'item_images';
 	protected $primaryKey 	= 'id';
 	protected $guarded 		= array('id');
 	protected $fillable 	= array(
@@ -21,7 +21,7 @@ class ItemImage extends Eloquent{
 								);
 
 	static function getItemPrimaryImage($item_id){
-		return DB::table('item_image')
+		return DB::table('item_images')
 		->select('name')
 		->where('item_id',$item_id)
 		->where('is_primary',1)

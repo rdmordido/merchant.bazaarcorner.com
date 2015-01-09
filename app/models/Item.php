@@ -7,7 +7,7 @@ class Item extends Eloquent{
 	 *
 	 * @var string
 	 */
-	protected $table 		= 'item';
+	protected $table 		= 'items';
 	protected $primaryKey 	= 'id';
 	protected $guarded 		= array('id');
 	protected $fillable 	= array('brand_id','merchant_id','sku','name','description','price');

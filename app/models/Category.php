@@ -2,7 +2,7 @@
 
 class Category extends Eloquent{
 
-	protected $table 		= 'category';
+	protected $table 		= 'categories';
 	protected $primaryKey 	= 'id';
 	protected $hidden 		= array(
 									'created_at'
