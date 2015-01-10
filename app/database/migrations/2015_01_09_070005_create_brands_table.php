@@ -14,9 +14,7 @@ class CreateBrandsTable extends Migration {
 	{
 		Schema::create('brands',function($table){
 			$table->increments('id');
-			$table->string('code')->unique();
 			$table->string('name');
-			$table->text('description');
 			$table->integer('is_active')->default(1);
 			$table->timestamps();
 		});
