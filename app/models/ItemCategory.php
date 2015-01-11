@@ -20,8 +20,8 @@ class ItemCategory extends Eloquent{
 
 	static function getItemMainCategory($item_id){
 		return DB::table('item_categories')
-		->select('category.id','category.name')
-		->join('category','category.id','=','item_categories.category_id')
+		->select('categories.id','categories.name')
+		->join('categories','categories.id','=','item_categories.category_id')
 		->where('item_categories.item_id',$item_id)
 		->where('item_categories.is_primary',1)
 		->first();
@@ -29,8 +29,8 @@ class ItemCategory extends Eloquent{
 
 	static function getItemSubCategory($item_id){
 		return DB::table('item_categories')
-		->select('category.id','category.name')
-		->join('category','category.id','=','item_categories.category_id')
+		->select('categories.id','categories.name')
+		->join('categories','categories.id','=','item_categories.category_id')
 		->where('item_categories.item_id',$item_id)
 		->where('item_categories.is_primary',0)
 		->first();

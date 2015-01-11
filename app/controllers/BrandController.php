@@ -1,12 +1,7 @@
 <?php
 
-class CategoryController extends \BaseController {
+class BrandController extends \BaseController {
 
-	protected $category_model;
-
-	public function __construct(){
-		$this->category_model = new Category();
-	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -48,6 +43,7 @@ class CategoryController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		//
 	}
 
 
@@ -86,11 +82,7 @@ class CategoryController extends \BaseController {
 		//
 	}
 
-	public function subcategory($id){
-		return $this->category_model->getSubCategories($id);
-	}
-
-	public function brand($id){
-		return Category::with('brands')->where('id',$id)->first();
+	public function category($id){
+		return Brand::with('categories')->where('id',$id)->first();
 	}
 }

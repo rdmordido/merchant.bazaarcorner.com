@@ -13,9 +13,10 @@ class Item extends Eloquent{
 	protected $fillable 	= array('brand_id','merchant_id','sku','name','description','price');
 
 	private function generateSKU($brand_id){
-		$brand_model = new Brand();
-		$brand = $brand_model::find($brand_id);
-		return $brand->code.'_'.time(); //temporary sku format
+		//$brand_model = new Brand();
+		//$brand = $brand_model::find($brand_id);
+		//return $brand->code.'_'.time(); //temporary sku format
+		return $brand_id.'_'.time(); //temporary sku format
 	}
 
 	public function store($item = array()){
@@ -151,7 +152,7 @@ class Item extends Eloquent{
 	}
 	
 	public function categories(){
-		return $this->belongsToMany('Category','item_category');
+		return $this->belongsToMany('Category','item_categories');
 	}
 	public function images(){
 		return $this->hasMany('ItemImage','item_id');

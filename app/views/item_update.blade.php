@@ -65,20 +65,6 @@
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <td style="vertical-align:middle;"><label>Brand</label></td>
-	                    <td>
-	                        <div class="form-group" style="margin:0px;">
-	                            <label style="display:none;" class="control-label" for="item_brand">Brand name is required</label>	                            
-	                            <select id="item_brand" name="item_brand" class="form-control">
-	                            	<option value="">Select Brand Name</option>
-	                            	@foreach($brand_list as $brand)
-	                                <option value="{{$brand->id}}" @if($brand->id == $item->brand->id) selected @endif>{{$brand->name}}</option>
-	                                @endforeach
-                        		</select>
-	                        </div>
-	                    </td>
-	                </tr>
-	                <tr>
 	                    <td style="vertical-align:middle;"><label>Main Category</label></td>
 	                    <td>
 	                        <div class="form-group" style="margin:0px;">
@@ -101,6 +87,20 @@
 	                                <option value="">Select Sub Category</option>
 	                                @foreach($sub_categories as $category)
 	                                <option value="{{$category->id}}" @if($category->id == $item->sub_category->id) selected @endif>{{$category->name}}</option>
+	                                @endforeach
+                        		</select>
+	                        </div>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td style="vertical-align:middle;"><label>Brand</label></td>
+	                    <td>
+	                        <div class="form-group" style="margin:0px;">
+	                            <label style="display:none;" class="control-label" for="item_brand">Brand name is required</label>	                            
+	                            <select id="item_brand" name="item_brand" class="form-control">
+	                            	<option value="">Select Brand Name</option>
+	                            	@foreach($brand_list as $brand)
+	                                <option value="{{$brand->id}}" @if($brand->id == $item->brand->id) selected @endif>{{$brand->name}}</option>
 	                                @endforeach
                         		</select>
 	                        </div>
@@ -155,6 +155,7 @@
 							</table>
 	                    </td>
 	                </tr>
+	                <!--
 	                <tr>
 	                    <td style="vertical-align:middle;"><label>Upload Video</label></td>
 	                    <td>
@@ -169,7 +170,7 @@
 							</table>
 	                    </td>
 	                </tr>
-
+					-->
                 	<tr><td colspan="2" style="text-align:center;"><button type="submit" class="btn btn-primary">Update Item Details</button></td></tr>
                 </table>
             </div>

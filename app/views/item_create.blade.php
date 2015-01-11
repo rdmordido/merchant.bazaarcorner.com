@@ -58,25 +58,11 @@
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <td style="vertical-align:middle;"><label>Brand</label></td>
-	                    <td>
-	                        <div class="form-group" style="margin:0px;">
-	                            <label style="display:none;" class="control-label" for="item_brand">Brand name is required</label>	                            
-	                            <select id="item_brand" name="item_brand" class="form-control">
-	                            	<option value="">Select Brand Name</option>
-	                            	@foreach($brand_list as $brand)
-	                                <option value="{{$brand->id}}">{{$brand->name}}</option>
-	                                @endforeach
-                        		</select>
-	                        </div>
-	                    </td>
-	                </tr>
-	                <tr>
 	                    <td style="vertical-align:middle;"><label>Main Category</label></td>
 	                    <td>
 	                        <div class="form-group" style="margin:0px;">
 	                            <label style="display:none;" class="control-label" for="item_main_category">Main Category is required</label>
-	                            <select id="item_main_category" name="item_main_category" class="form-control">
+	                            <select id="item_main_category" name="item_main_category" class="category-listing form-control">
 	                                <option value="">Select Main Category</option>
 	                                @foreach($main_categories as $category)
 	                                <option value="{{$category->id}}">{{$category->name}}</option>
@@ -90,8 +76,19 @@
 	                    <td>
 	                        <div class="form-group" style="margin:0px;">
 	                            <label style="display:none;" class="control-label" for="item_sub_category">Sub Category is required</label>	                            
-	                            <select id="item_sub_category" name="item_sub_category" class="form-control">
+	                            <select id="item_sub_category" name="item_sub_category" class="category-listing form-control">
 	                                <option value="">Select Sub Category</option>
+                        		</select>
+	                        </div>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td style="vertical-align:middle;"><label>Brand</label></td>
+	                    <td>
+	                        <div class="form-group" style="margin:0px;">
+	                            <label style="display:none;" class="control-label" for="item_brand">Brand name is required</label>	                            
+	                            <select id="item_brand" name="item_brand" class="form-control">
+	                            	<option value="">Select Brand Name</option>
                         		</select>
 	                        </div>
 	                    </td>

@@ -147,12 +147,22 @@ var bc_merchant = function(){
 
 
         $('#item_main_category').change(function(){            
-            var url = '/category/'+$(this).val()+'?getSubCategories';
+            var url = '/category/'+$(this).val()+'/subcategory';
             $.get(url, function(result) {
                   if(result.length > 0){
                     $('#item_sub_category').html('<option value="">Select Sub Category</option>');
                     $.each(result,function(i,category){
                         $('#item_sub_category').append('<option value="'+category.id+'">'+category.name+'</option>');
+                    });
+                  }
+            });
+
+            var url = '/category/'+$(this).val()+'/brand';
+            $.get(url, function(result) {
+                  if(result.brands.length > 0){
+                    $('#item_brand').html('<option value="">Select Brand Name</option>');
+                    $.each(result.brands,function(i,brand){
+                        $('#item_brand').append('<option value="'+brand.id+'">'+brand.name+'</option>');
                     });
                   }
             });
@@ -325,9 +335,9 @@ var bc_merchant = function(){
     this.clear_form_create_item = function(){
         $('#item_name').val('');
         $('#item_price').val('');
-        $('#item_brand').val('');
         $('#item_main_category').val('');
-        $('#item_sub_category').val('');
+        $('#item_sub_category').html('<option value="">Select Sub Category</option>');
+        $('#item_brand').html('<option value="">Select Brand Name</option>');
         $('#item_description').val('');
         $('#item_primary_image').val('');
         $('table#uploaded_images').html('');
