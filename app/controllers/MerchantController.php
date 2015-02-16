@@ -31,10 +31,10 @@ class MerchantController extends BaseController {
 			$merchant_data,
 			array(
 					 'name' 				=> 'required|unique:merchants'
-					,'username' 			=> 'required|unique:user'
+					,'username' 			=> 'required|unique:users'
 					,'password' 			=> (isset($data['password_confirmation'])) ? 'required|confirmed' : 'required'
 					,'password_confirmation'=> 'required'
-					,'email' 				=> 'required|unique:user'
+					,'email' 				=> 'required|unique:users'
 			),
 			array(
 					 'name.required' 			=> 'Merchant name is required'
