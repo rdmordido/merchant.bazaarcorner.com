@@ -30,7 +30,7 @@ class MerchantController extends BaseController {
 		$validator = Validator::make(
 			$merchant_data,
 			array(
-					 'name' 				=> 'required|unique:merchant'
+					 'name' 				=> 'required|unique:merchants'
 					,'username' 			=> 'required|unique:user'
 					,'password' 			=> (isset($data['password_confirmation'])) ? 'required|confirmed' : 'required'
 					,'password_confirmation'=> 'required'
