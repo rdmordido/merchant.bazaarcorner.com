@@ -16,9 +16,9 @@ class CreateItemsTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('sku')->unique();
-			$table->text('description');
+			$table->text('description')->nullable();
 			$table->decimal('price',10,2);
-			$table->integer('brand_id')->length(10)->unsigned();
+			$table->integer('brand_id')->length(10)->unsigned()->nullable();
 			$table->integer('merchant_id')->length(10)->unsigned();
 			$table->integer('discount_id')->length(10)->unsigned()->nullable();
 			$table->timestamps();

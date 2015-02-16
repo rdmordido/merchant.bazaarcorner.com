@@ -55,18 +55,18 @@ class ItemController extends \BaseController {
 			$item_data,
 			array(
 					 'name' 				=> 'required'
-					,'description' 			=> 'required'
+					//,'description' 			=> 'required'
 					,'price' 				=> 'required'
-					,'brand_id' 			=> 'required'
+					//,'brand_id' 			=> 'required'
 					,'item_main_category' 	=> 'required'
 					,'item_sub_category' 	=> 'required'
 					,'item_primary_image' 	=> 'required'
 			),
 			array(
 					 'name.required' 				=> 'Item name is required'
-					,'description.required' 		=> 'Description is required'
+					//,'description.required' 		=> 'Description is required'
 					,'price.required' 				=> 'Price is required'
-					,'brand_id.required' 			=> 'Brand name is required'
+					//,'brand_id.required' 			=> 'Brand name is required'
 					,'item_main_category.required' 	=> 'Main Category is required'
 					,'item_sub_category.required' 	=> 'Sub Category is required'
 					,'item_primary_image.required' 	=> 'Primary Image is required'
