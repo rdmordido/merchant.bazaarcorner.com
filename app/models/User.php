@@ -43,8 +43,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$new_user->facebook 		= (isset($user_data['facebook']) && !empty($user_data['facebook']))				? $user_data['facebook'] 		: null;
 		$new_user->twitter 			= (isset($user_data['twitter']) && !empty($user_data['twitter'])) 				? $user_data['twitter'] 		: null;
 		$new_user->profile_image 	= (isset($user_data['profile_image']) && !empty($user_data['profile_image'])) 	? $user_data['profile_image'] 	: null;
-		$new_user->cover_image 		= (isset($user_data['cover_image']) && !empty($user_data['cover_image'])) 		? $user_data['cover_image'] 	: null;
-		$new_user->cover_text 		= (isset($user_data['cover_text']) && !empty($user_data['cover_text']))			? $user_data['cover_text'] 		: null;
 		if($new_user->save())
 			return $new_user;
 		else
