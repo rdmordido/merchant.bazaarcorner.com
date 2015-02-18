@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('RoleTableSeeder');
 		$this->call('UserTableSeeder');
+            $this->call('OrderStatusTableSeeder');
 		$this->call('MerchantTableSeeder');
 		$this->call('CategoryTableSeeder');
             $this->call('BrandTableSeeder');
@@ -49,6 +50,18 @@ class UserTableSeeder extends seeder {
 		));
 	}
 }
+
+class OrderStatusTableSeeder extends seeder {
+      public function run(){
+            DB::table('order_status')->delete();
+            DB::table('order_status')->insert(array(
+                   array('code' => 500,'text' => 'pending')
+                  ,array('code' => 1000,'text' => 'success')
+                  ,array('code' => 2000,'text' => 'complete')
+            ));
+      }
+}
+
 
 class MerchantTableSeeder extends seeder {
 	public function run(){
