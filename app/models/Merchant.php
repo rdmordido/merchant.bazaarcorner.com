@@ -41,6 +41,10 @@ class Merchant extends Eloquent{
 		return $this->belongsTo('User');
 	}
 
+	public function items(){
+		return $this->hasMany('Item');
+	}
+
 	public function orders(){
 		return $this->hasMany('Order');
 	}
