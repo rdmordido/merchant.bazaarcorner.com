@@ -55,7 +55,7 @@ class OrderStatusTableSeeder extends seeder {
       public function run(){
             DB::table('order_status')->delete();
             DB::table('order_status')->insert(array(
-                  ,array('code' => 1000,'text' => 'pending')
+                   array('code' => 1000,'text' => 'pending')
                   ,array('code' => 1001,'text' => 'declined')
                   ,array('code' => 1002,'text' => 'refund')
                   ,array('code' => 2000,'text' => 'approved')
