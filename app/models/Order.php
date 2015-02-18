@@ -8,9 +8,12 @@ class Order extends Eloquent{
 	/*====================================================================================================================================
 	| RELATIONSHIPS
 	/*====================================================================================================================================*/
-	public function status()
-    {
+	public function status(){
         return $this->belongsTo('OrderStatus','code','order_status');
+    }
+
+    public function items(){
+    	return $this->hasMany('Item');
     }
 
     public function payment(){
