@@ -11,12 +11,38 @@ class Item extends Eloquent{
 	protected $primaryKey 	= 'id';
 	protected $guarded 		= array('id');
 	protected $fillable 	= array('brand_id','merchant_id','sku','name','description','price');
+	protected $appends   	= array('brand','main_category','sub_category','primary_image','images');
 
-	private function generateSKU($brand_id){
-		//$brand_model = new Brand();
-		//$brand = $brand_model::find($brand_id);
-		//return $brand->code.'_'.time(); //temporary sku format
-		return $brand_id.'_'.time(); //temporary sku format
+	public function getBrandAttribute(){
+		return Brand::find($this->brand_id);
+	}
+
+	public function getMainCategoryAttribute(){
+		return ItemCategory::where('item_id',$this->id)->where('is_primary',1)->first();
+	}
+
+	public function getSubCategoryAttribute(){
+		return ItemCategory::where('item_id',$this->id)->where('is_primary',0)->first();
+	}
+
+	public function getPrimaryImageAttribute(){
+		$image 		= ItemImage::where('item_id',$this->id)->where('is_primary',1)->first();
+		$image 		= ($image) ? $image : new stdClass;		
+		$urls 		= getUploadedImageUrl('item',(isset($image->name)) ? $image->name : '');
+		
+		foreach($urls as $key=>$url){
+			$image->$key = $url;
+		}
+		
+		return $image;
+	}
+
+	public function getImagesAttribute(){
+		return ItemImage::where('item_id',$this->id)->get();
+	}
+
+	private function generateSKU(){
+		return time(); //temporary sku format
 	}
 
 	public function store($item = array()){
@@ -25,10 +51,12 @@ class Item extends Eloquent{
 		$new_item->merchant_id 	= Auth::user()->merchant->id;
 		$new_item->name 		= $item['name'];
 		$new_item->price 		= $item['price'];
-		$new_item->brand_id 	= $item['brand_id'];
-		$new_item->description 	= $item['description'];
-		$new_item->sku 			= $this->generateSKU($new_item->brand_id);
+		$new_item->brand_id 	= (isset($item['brand_id']) && !empty($item['brand_id'])) 		? $item['brand_id'] 	: null;
+		$new_item->description 	= (isset($item['description']) && !empty($item['description'])) ? $item['description'] 	: null;
+		$new_item->sku 			= $this->generateSKU();
+
 		if($new_item->save()){
+
 			/*Save Item Categories*/
 			$item_categories = array(
 					new ItemCategory(array('category_id'=>$item['item_main_category'],'is_primary'=>1)),
@@ -39,11 +67,14 @@ class Item extends Eloquent{
 			/*Save Item Images*/
 			$primary_image 			= $item['item_primary_image'];
 			$uploaded_images 		= $item['item_images'];
-			$item_images 			= array();
-			foreach($uploaded_images as $image){
-				$item_images[] = new ItemImage(array('name'=>$image,'is_primary'=>($image == $primary_image) ? 1 : 0));
+
+			if(is_array($uploaded_images) && sizeof($uploaded_images) > 0){
+				$item_images 			= array();
+				foreach($uploaded_images as $image){
+					$item_images[] = new ItemImage(array('name'=>$image,'is_primary'=>($image == $primary_image) ? 1 : 0));
+				}
+				$new_item->images()->saveMany($item_images);
 			}
-			$new_item->images()->saveMany($item_images);
 
 			return $item;
 		}else{
@@ -67,16 +98,19 @@ class Item extends Eloquent{
 					new ItemCategory(array('category_id'=>$item_details['item_sub_category'],'is_primary'=>0))
 			);
 			$item->item_categories()->saveMany($item_categories);
-					
-			ItemImage::where('item_id', '=', $item_id)->delete();
 
+			
 			$primary_image 			= $item_details['item_primary_image'];
 			$uploaded_images 		= $item_details['item_images'];
-			$item_images 			= array();
-			foreach($uploaded_images as $image){
-				$item_images[] = new ItemImage(array('name'=>$image,'is_primary'=>($image == $primary_image) ? 1 : 0));
+
+			if(is_array($uploaded_images) && sizeof($uploaded_images) > 0){
+				ItemImage::where('item_id', '=', $item_id)->delete();
+				$item_images 			= array();
+				foreach($uploaded_images as $image){
+					$item_images[] = new ItemImage(array('name'=>$image,'is_primary'=>($image == $primary_image) ? 1 : 0));
+				}
+				$item->images()->saveMany($item_images);
 			}
-			$item->images()->saveMany($item_images);
 			
 			$item->save();
 
@@ -87,8 +121,6 @@ class Item extends Eloquent{
 	public function getDetailsById($id){
 		$item = Item::findOrFail($id);
 		if($item){
-			$item->main_category 	= ItemCategory::getItemMainCategory($id);
-			$item->sub_category 	= ItemCategory::getItemSubCategory($id);
 			$item->primary_image 	= ItemImage::getItemPrimaryImage($id);
 			return $item;
 		}else{

@@ -14,8 +14,7 @@ class ItemController extends \BaseController {
 	 */
 	public function index()
 	{
-		$this->data['items_list'] = $this->item_model->getMerchantItemsList(Auth::user()->id);
-		return View::make('item_list',$this->data);
+		return View::make('item.index',$this->data);
 	}
 
 
@@ -28,8 +27,7 @@ class ItemController extends \BaseController {
 	{
 		$this->data['brand_list'] 		= $this->brand_model->getBrandList();
 		$this->data['main_categories'] 	= $this->category_model->getMainCategories();
-		$this->data['discount_list'] 	= $this->discount_model->getActiveMerchantDiscountList(Auth::user()->merchant->id);
-		return View::make('item_create',$this->data);
+		return View::make('item.create',$this->data);
 	}
 
 
@@ -60,13 +58,13 @@ class ItemController extends \BaseController {
 					//,'brand_id' 			=> 'required'
 					,'item_main_category' 	=> 'required'
 					,'item_sub_category' 	=> 'required'
-					,'item_primary_image' 	=> 'required'
+					//,'item_primary_image' 	=> 'required'
 			),
 			array(
 					 'name.required' 				=> 'Item name is required'
-					//,'description.required' 		=> 'Description is required'
+					,'description.required' 		=> 'Description is required'
 					,'price.required' 				=> 'Price is required'
-					//,'brand_id.required' 			=> 'Brand name is required'
+					,'brand_id.required' 			=> 'Brand name is required'
 					,'item_main_category.required' 	=> 'Main Category is required'
 					,'item_sub_category.required' 	=> 'Sub Category is required'
 					,'item_primary_image.required' 	=> 'Primary Image is required'
@@ -155,12 +153,12 @@ class ItemController extends \BaseController {
 					 'item_id' 				=> 'required'
 					,'merchant_id' 			=> 'required'
 					,'name' 				=> 'required'
-					,'description' 			=> 'required'
+					//,'description' 			=> 'required'
 					,'price' 				=> 'required'
-					,'brand_id' 			=> 'required'
+					//,'brand_id' 			=> 'required'
 					,'item_main_category' 	=> 'required'
 					,'item_sub_category' 	=> 'required'
-					,'item_primary_image' 	=> 'required'
+					//,'item_primary_image' 	=> 'required'
 			),
 			array(
 					 'item_id.required' 			=> 'Item Id is required'

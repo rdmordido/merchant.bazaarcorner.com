@@ -9,7 +9,7 @@ class Merchant extends Eloquent{
 									,'updated_at'
 									,'is_active'
 								);
-	
+
 	public function store($data){
 		$user 		= new User();
 		$user_data 	= array(
@@ -43,6 +43,10 @@ class Merchant extends Eloquent{
 
 	public function items(){
 		return $this->hasMany('Item');
+	}
+
+	public function discounts(){
+		return $this->hasMany('Discount');
 	}
 
 	public function orders(){

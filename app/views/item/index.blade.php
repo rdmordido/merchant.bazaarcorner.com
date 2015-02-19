@@ -28,9 +28,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	@foreach($items_list as $item)
+                        	@foreach($merchant->items()->get() as $item)
                             <tr>
-                                <td class="center"><img src="{{getUploadedImageUrl('item',$item->primary_image->name)->thumbUrl}}"/></td>
+                                <td class="center"><img src="{{$item->primary_image->thumbUrl}}"/></td>
                                 <td>{{$item->name}}</td>
                                 <td>@currency($item->price)</td>
                                 <td>{{$item->brand->name}}</td>

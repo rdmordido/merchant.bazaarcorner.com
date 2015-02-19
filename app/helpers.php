@@ -9,7 +9,7 @@ function getUploadedImageurl($type,$image_name){
         $base_path      = public_path()."/uploads/{$type}/";
         $image_url      = new stdClass;
 
-        if($type != '' && file_exists($base_path.$image_name)){
+        if($type != '' && $image_name !='' && file_exists($base_path.$image_name)){
                 $image_url->url         = $base_url.'/'.$image_name;
                 $image_url->thumbUrl    = $base_url.'/thumbnail/'.$image_name;
                 $image_url->mediumUrl   = $base_url.'/medium/'.$image_name;
