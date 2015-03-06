@@ -25,6 +25,7 @@ class ItemController extends \BaseController {
 	 */
 	public function create()
 	{
+		$this->data['discount_list'] 	= $this->discount_model->getActiveMerchantDiscountList(Auth::user()->id);
 		$this->data['brand_list'] 		= $this->brand_model->getBrandList();
 		$this->data['main_categories'] 	= $this->category_model->getMainCategories();
 		return View::make('item.create',$this->data);
