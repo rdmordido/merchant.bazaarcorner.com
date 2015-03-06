@@ -10,15 +10,16 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('register','MerchantController@showMerchantCreate');
-Route::post('merchant/create','MerchantController@create');
+//Route::get('register','MerchantController@showMerchantCreate');
+//Route::post('merchant/create','MerchantController@create');
 Route::get('login','MerchantController@showMerchantLogin');
-Route::post('login','UserController@login');
-Route::get('logout','UserController@logout');
+Route::post('login','MerchantController@login');
+Route::get('logout','MerchantController@logout');
 Route::group(array('before' => 'auth'), function()
 {
     Route::get('/','MerchantController@dashboard');
-    Route::get('profile','UserController@profile');
+    Route::get('profile','MerchantController@profile');
+    Route::post('merchant/update/{id}','MerchantController@update');
     Route::put('user/{id}','UserController@update');
     Route::put('profile_image','UserController@update_profile_image');
     Route::resource('item', 'ItemController');
@@ -30,6 +31,8 @@ Route::group(array('before' => 'auth'), function()
     Route::get('/discount/{id}/items','DiscountController@items');
     Route::controller('follower','FollowerController');
     Route::controller('page', 'PageController');
+
+    Route::get('/merchant', 'MerchantController@index');
 });
 
 /*JQuery Fileupload*/

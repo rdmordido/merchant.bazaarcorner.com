@@ -8,9 +8,8 @@ class BaseController extends Controller {
 	protected $brand_model;
 	protected $category_model;
 	
-	public function __construct(){
-
-		$this->merchant 		= Merchant::find(Auth::user()->id);
+	public function __construct(){		
+		$this->merchant 		= (Auth::check()) ? Merchant::find(Auth::user()->id) : false;
 		$this->data['merchant'] = $this->merchant;
 		$this->item_model 		= new Item();
 		$this->brand_model 		= new Brand();

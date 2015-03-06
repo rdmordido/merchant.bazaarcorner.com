@@ -118,7 +118,7 @@ class ItemController extends \BaseController {
 		$item_details 					= $this->item_model->getDetailsById($id);
 		$this->data['item'] 			= $item_details;
 		$this->data['brand_list'] 		= $this->brand_model->getBrandList();
-		$this->data['discount_list'] 	= $this->discount_model->getActiveMerchantDiscountList(Auth::user()->merchant->id);
+		$this->data['discount_list'] 	= $this->discount_model->getActiveMerchantDiscountList(Auth::user()->id);
 		$this->data['main_categories'] 	= $this->category_model->getMainCategories();
 		$this->data['sub_categories'] 	= $this->category_model->getSubCategories($item_details->main_category->id);
 		return View::make('item_update',$this->data);

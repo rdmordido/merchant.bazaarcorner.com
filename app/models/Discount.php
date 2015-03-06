@@ -20,7 +20,7 @@ class Discount extends Eloquent{
 	public function store($input = array()){
 
 		$discount = new Discount;
-		$discount->merchant_id 		= Auth::user()->merchant->id;
+		$discount->merchant_id 		= Auth::user()->id;
 		$discount->title 			= $input['title'];
 		$discount->description 		= $input['description'];
 		$discount->start 			= $input['start'];
@@ -41,7 +41,7 @@ class Discount extends Eloquent{
 		$discount_id = (isset($input['discount_id']) && !empty($input['discount_id'])) ? $input['discount_id'] : false;
 		if($discount = Discount::findOrFail($discount_id)){
 			
-			$discount->merchant_id 		= Auth::user()->merchant->id;
+			$discount->merchant_id 		= Auth::user()->id;
 			$discount->title 			= (isset($input['title']) && $input['title'] != '') 			? $input['title'] 		: $discount->title;
 			$discount->description 		= (isset($input['description']) && $input['description'] != '') ? $input['description'] : $discount->description;
 			$discount->start 			= (isset($input['start']) && $input['start'] != '') 			? $input['start'] 		: $discount->start;

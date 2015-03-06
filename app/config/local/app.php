@@ -12,7 +12,7 @@ return array(
 	| application. If disabled, a simple generic error page is shown.
 	|
 	*/
-	'url' => 'http://merchant.bazaarcorner.local',
+	'url' => 'http://merchant.bazaarcorner.app',
 	'debug' => true,
 
 );

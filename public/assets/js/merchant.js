@@ -228,11 +228,11 @@ var bc_merchant = function(){
             e.preventDefault();
         });
 
-        $('#form-update-user').submit(function(e){
-            var user_id = $('#user_id').val();
+        $('#form-update-merchant').submit(function(e){
+            var merchant_id = $('#merchant_id').val();
             $.ajax({
-                type    : 'put',
-                url     : '/user/'+user_id,
+                type    : 'post',
+                url     : '/merchant/update/'+merchant_id,
                 data    : $(this).serialize(),
                 dataType: 'json',
                 success : function(result){
@@ -244,6 +244,7 @@ var bc_merchant = function(){
                         //if(result.data.old_image && result.data.old_image != ''){ window.bc_fileupload.delete_image('discount',result.data.old_image); }
                     }else{
                         $('#update-user-success').hide();
+                        if(result.error_message.name)                   { self.show_form_group_error('name',result.error_message.name); }
                         if(result.error_message.username)               { self.show_form_group_error('username',result.error_message.username); }
                         if(result.error_message.password)               { self.show_form_group_error('password',result.error_message.password); }
                         if(result.error_message.password_confirmation)  { self.show_form_group_error('password_confirmation',result.error_message.password_confirmation); }
@@ -306,6 +307,8 @@ var bc_merchant = function(){
                     { 'bSortable': false, 'aTargets': [0,7] }
                 ]
             });
+
+            $('#merchant-listing').dataTable();
     }
 
     this.init_datepicker = function(){

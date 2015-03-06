@@ -48,7 +48,7 @@ class Item extends Eloquent{
 	public function store($item = array()){
 
 		$new_item = new Item;
-		$new_item->merchant_id 	= Auth::user()->merchant->id;
+		$new_item->merchant_id 	= Auth::user()->id;
 		$new_item->name 		= $item['name'];
 		$new_item->price 		= $item['price'];
 		$new_item->brand_id 	= (isset($item['brand_id']) && !empty($item['brand_id'])) 		? $item['brand_id'] 	: null;
