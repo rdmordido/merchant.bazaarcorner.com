@@ -28,7 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	@foreach($merchant->items()->get() as $item)
+                        	@foreach($items as $item)
                             <tr>
                                 <td class="center"><img src="{{$item->primary_image->thumbUrl}}"/></td>
                                 <td>{{$item->name}}</td>

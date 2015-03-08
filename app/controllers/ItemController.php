@@ -14,6 +14,7 @@ class ItemController extends \BaseController {
 	 */
 	public function index()
 	{
+		$this->data['items'] = Auth::user()->items()->get();
 		return View::make('item.index',$this->data);
 	}
 
