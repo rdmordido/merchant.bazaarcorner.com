@@ -18,11 +18,11 @@ class Item extends Eloquent{
 	}
 
 	public function getMainCategoryAttribute(){
-		return ItemCategory::where('item_id',$this->id)->where('is_primary',1)->first();
+		return ItemCategory::getItemMainCategory($this->id);
 	}
 
 	public function getSubCategoryAttribute(){
-		return ItemCategory::where('item_id',$this->id)->where('is_primary',0)->first();
+		return ItemCategory::getItemSubCategory($this->id);
 	}
 
 	public function getPrimaryImageAttribute(){
