@@ -33,7 +33,7 @@
                                 <td class="center"><img src="{{$item->primary_image->thumbUrl}}"/></td>
                                 <td>{{$item->name}}</td>
                                 <td>@currency($item->price)</td>
-                                <td>{{$item->brand->name}}</td>
+                                <td>{{$item->brand->name or ''}}</td>
                                 <td>{{$item->main_category->name}}</td>
                                 <td>{{$item->sub_category->name}}</td>
                                 <td class="center">

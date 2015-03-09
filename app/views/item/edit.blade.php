@@ -100,7 +100,7 @@
 	                            <select id="item_brand" name="item_brand" class="form-control">
 	                            	<option value="">Select Brand Name</option>
 	                            	@foreach($brand_list as $brand)
-	                                <option value="{{$brand->id}}" @if($brand->id == $item->brand->id) selected @endif>{{$brand->name}}</option>
+	                                <option value="{{$brand->id}}" @if(isset($item->brand->id) && $item->brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
 	                                @endforeach
                         		</select>
 	                        </div>
