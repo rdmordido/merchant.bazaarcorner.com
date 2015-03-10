@@ -22,9 +22,9 @@ class CreateItemsTable extends Migration {
 			$table->integer('merchant_id')->length(10)->unsigned();
 			$table->integer('discount_id')->length(10)->unsigned()->nullable();
 			$table->timestamps();
-			$table->foreign('brand_id')->references('id')->on('brands');
-			$table->foreign('merchant_id')->references('id')->on('merchants');
-			$table->foreign('discount_id')->references('id')->on('discounts');
+			$table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null')->onUpdate('cascade');
+			$table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('discount_id')->references('id')->on('discounts')->onDelete('set null')->onUpdate('cascade');
 		});
 	}
 

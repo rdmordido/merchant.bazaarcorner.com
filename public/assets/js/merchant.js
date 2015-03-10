@@ -255,6 +255,36 @@ var bc_merchant = function(){
             });
             e.preventDefault();
         });
+
+        $('button.btn-remove-item').click(function(e){
+            var item_id = $(this).attr('item-id');
+            $.ajax({
+                type    : 'delete',
+                url     : '/item/'+item_id,
+                dataType: 'json',
+                success : function(result){
+                    if(result.success){
+                        window.location.reload();
+                    }
+                }
+            });
+            e.preventDefault();
+        });
+
+        $('button.btn-remove-discount').click(function(e){
+            var discount_id = $(this).attr('discount-id');
+            $.ajax({
+                type    : 'delete',
+                url     : '/discount/'+discount_id,
+                dataType: 'json',
+                success : function(result){
+                    if(result.success){
+                        window.location.reload();
+                    }
+                }
+            });
+            e.preventDefault();
+        });
     }
 
     this.init_modals = function(){
@@ -298,7 +328,7 @@ var bc_merchant = function(){
 
             $('#merchant-discount-list').dataTable({
                 "aoColumnDefs": [
-                    { 'bSortable': false, 'aTargets': [0,4] }
+                    { 'bSortable': false, 'aTargets': [0,3] }
                 ]
             });
 
@@ -347,7 +377,7 @@ var bc_merchant = function(){
         $('#fileupload-delete-all').hide();
     }
     this.clear_form_create_discount = function(){
-        $('#discount_name').val('');
+        $('#discount_title').val('');
         $('#discount_type').val('');
         $('#discount_price').val('');
         $('#discount_rate').val('');

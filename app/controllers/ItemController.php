@@ -59,7 +59,7 @@ class ItemController extends \BaseController {
 					,'price' 				=> 'required'
 					//,'brand_id' 			=> 'required'
 					,'item_main_category' 	=> 'required'
-					,'item_sub_category' 	=> 'required'
+					//,'item_sub_category' 	=> 'required'
 					//,'item_primary_image' 	=> 'required'
 			),
 			array(
@@ -105,7 +105,7 @@ class ItemController extends \BaseController {
 	public function show($id)
 	{
 		$item_details = $this->item_model->getDetailsById($id);
-		return Response::view('modal_item_details',array('item'=>$item_details));
+		return Response::view('item.show',array('item'=>$item_details));
 	}
 
 
@@ -123,7 +123,7 @@ class ItemController extends \BaseController {
 		$this->data['discount_list'] 	= $this->discount_model->getActiveMerchantDiscountList(Auth::user()->id);
 		$this->data['main_categories'] 	= $this->category_model->getMainCategories();
 		$this->data['sub_categories'] 	= $this->category_model->getSubCategories($item_details->main_category->id);
-		return View::make('item_update',$this->data);
+		return View::make('item.edit',$this->data);
 	}
 
 
@@ -159,7 +159,7 @@ class ItemController extends \BaseController {
 					,'price' 				=> 'required'
 					//,'brand_id' 			=> 'required'
 					,'item_main_category' 	=> 'required'
-					,'item_sub_category' 	=> 'required'
+					//,'item_sub_category' 	=> 'required'
 					//,'item_primary_image' 	=> 'required'
 			),
 			array(
@@ -207,6 +207,9 @@ class ItemController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(Item::destroy($id))
+			return Response::json(array('success'=>true));
+		else
+			return Response::json(array('success'=>false));
 	}
 }

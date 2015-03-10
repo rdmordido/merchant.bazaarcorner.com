@@ -30,15 +30,15 @@
                         <tbody>
                         	@foreach($items as $item)
                             <tr>
-                                <td class="center"><img src="{{$item->primary_image->thumbUrl}}"/></td>
+                                <td class="center"><img src="{{$item->primary_image->thumbUrl}}" class="img-responsive img-thumbnail" width="85" height="66" /></td>
                                 <td>{{$item->name}}</td>
                                 <td>@currency($item->price)</td>
                                 <td>{{$item->brand->name or ''}}</td>
                                 <td>{{$item->main_category->name}}</td>
-                                <td>{{$item->sub_category->name}}</td>
+                                <td>{{$item->sub_category->name or ''}}</td>
                                 <td class="center">
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-sm btn-default btn-view-item-details" item-id="{{$item->id}}" data-toggle="modal" data-target="#bc-merchant-modal"><i class="fa fa-search"></i> View</button>
+                                        <button type="button" class="btn btn-sm btn-default" onClick="window.location='{{url("item/$item->id")}}'"><i class="fa fa-search"></i> View</button>
                                         <button type="button" class="btn btn-sm btn-default" onClick="window.location='{{url("item/$item->id/edit")}}'"><i class="fa fa-edit"></i> Update</button>
                                         <button type="button" class="btn btn-sm btn-default btn-remove-item" item-id="{{$item->id}}"><i class="fa fa-trash-o"></i> Remove</button>
                                     </div>

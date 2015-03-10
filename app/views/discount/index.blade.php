@@ -18,17 +18,21 @@
                     <table id="merchant-discount-list" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
+                                <!--
                                 <th style="width:10%"></th>
-                                <th style="width:40%">Title</th>
-                                <th style="width:10%">Items</th>
+                                -->
+                                <th style="width:auto">Title</th>
+                                <th style="width:5%">Items</th>
                                 <th style="width:5%">Active</th>
-                                <th style="width:35%;"></th>
+                                <th style="width:20%;"></th>
                             </tr>
                         </thead>
                         <tbody>
                         	@foreach($discount_list as $discount)
                             <tr>
-                                <td class="center"><img src="{{getUploadedImageUrl('discount',$discount->image)->thumbUrl}}"/></td>
+                                <!--
+                                <td class="center"><img src="{{getUploadedImageUrl('discount',$discount->image)->thumbUrl}}" class="img-responsive img-thumbnail" width="85" height="66"/></td>
+                                -->
                                 <td>{{$discount->title}}</td>
                                 <td><span class="badge">{{$discount->items()->count()}}</span></td>
                                 <td>{{($discount->is_active == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning available">Inactive</span>'}}</td>

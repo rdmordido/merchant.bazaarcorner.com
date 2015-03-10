@@ -18,11 +18,14 @@ class CreateDiscountsTable extends Migration {
 			$table->string('title')->unique();
 			$table->dateTime('start');
 			$table->dateTime('end');
-			$table->decimal('price',10,2);
+			$table->string('type');
+			$table->float('rate')->nullable();
+			$table->decimal('price',10,2)->nullable();
 			$table->string('image')->nullable();
+			$table->string('description')->nullable();
 			$table->integer('is_active')->default(1);
 			$table->timestamps();
-			$table->foreign('merchant_id')->references('id')->on('merchants');
+			$table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade')->onUpdate('cascade');
 		});
 	}
 

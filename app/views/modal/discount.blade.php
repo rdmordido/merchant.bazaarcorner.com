@@ -1,9 +1,11 @@
 <div class="table-responsive">
     <table class="table">
+      <!--
       <tr>
           <td style="vertical-align:middle;width:180px;"><label>Uploaded Image</label></td>
           <td class="center"><img src="{{getUploadedImageUrl('discount',$discount->image)->thumbUrl}}"/></td>
       </tr>
+      -->
       <tr>
           <td style="vertical-align:middle;width:180px;"><label>Title</label></td>
           <td>{{$discount->title}}</td>

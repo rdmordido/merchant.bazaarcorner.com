@@ -16,8 +16,8 @@ class CreateItemDiscountsTable extends Migration {
 			$table->integer('item_id')->length(10)->unsigned();
 			$table->integer('discount_id')->length(10)->unsigned();
 			$table->timestamps();
-			$table->foreign('item_id')->references('id')->on('items');
-			$table->foreign('discount_id')->references('id')->on('discounts');
+			$table->foreign('item_id')->references('id')->on('items')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('discount_id')->references('id')->on('discounts')->onDelete('cascade')->onUpdate('cascade');
 		});
 	}
 

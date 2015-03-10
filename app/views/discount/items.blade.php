@@ -52,10 +52,12 @@
                 </table>
 
                 <div class="margin">
+                <!--
                     <button type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add Items</button>
                     <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> Deactivate</button>
                     <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Remove</button>
                     <button type="button" class="btn btn-sm btn-default"><i class="fa fa-edit"></i> Update Details</button>
+                -->
                 </div>
 
                 <div class="row">
@@ -83,9 +85,9 @@
                                                 <td>{{$item->name}}</td>
                                                 <td>@currency($item->price)</td>
                                                 <td>@currency($item->getItemListPrice())</td>
-                                                <td>{{$item->brand->name}}</td>
+                                                <td>{{$item->brand->name or 'None'}}</td>
                                                 <td>{{$item->getItemMainCategory()->name}}</td>
-                                                <td>{{$item->getItemSubCategory()->name}}</td>
+                                                <td>{{$item->getItemSubCategory()->name or 'None'}}</td>
                                                 <td class="center"></td>
                                             </tr>
                                             @endforeach

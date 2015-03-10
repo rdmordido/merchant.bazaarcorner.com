@@ -14,7 +14,7 @@ class DiscountController extends \BaseController {
 	public function index()
 	{
 		$this->data['discount_list'] = $this->discount_model->getMerchantDiscountsList(Auth::user()->id);		
-		return View::make('discount_list',$this->data);
+		return View::make('discount.index',$this->data);
 	}
 
 
@@ -26,7 +26,7 @@ class DiscountController extends \BaseController {
 	public function create()
 	{
 		
-		return View::make('discount_create');
+		return View::make('discount.create');
 	}
 
 
@@ -57,7 +57,7 @@ class DiscountController extends \BaseController {
 					,'price' 				=> (isset($data['discount_type']) && $data['discount_type'] == 'price') ? 'required' : ''
 					,'rate' 				=> (isset($data['discount_type']) && $data['discount_type'] == 'rate') 	? 'required' : ''
 					,'date' 				=> 'required'					
-					,'image' 				=> 'required'
+					//,'image' 				=> 'required'
 			),
 			array(
 					 'title.required' 			=> 'Discount title is required'
@@ -100,7 +100,7 @@ class DiscountController extends \BaseController {
 	public function show($id)
 	{
 		$discount_details = $this->discount_model->getDetailsById($id);
-		return Response::view('modal_discount_details',array('discount'=>$discount_details));
+		return Response::view('modal.discount',array('discount'=>$discount_details));
 	}
 
 
@@ -113,7 +113,7 @@ class DiscountController extends \BaseController {
 	public function edit($id)
 	{
 		$discount_details = $this->discount_model->getDetailsById($id);
-		return View::make('discount_update',array('discount'=>$discount_details));
+		return View::make('discount.edit',array('discount'=>$discount_details));
 	}
 
 
@@ -147,7 +147,7 @@ class DiscountController extends \BaseController {
 					,'price' 				=> (isset($data['discount_type']) && $data['discount_type'] == 'price') ? 'required' : ''
 					,'rate' 				=> (isset($data['discount_type']) && $data['discount_type'] == 'rate') 	? 'required' : ''
 					,'date' 				=> 'required'					
-					,'image' 				=> 'required'
+					//,'image' 				=> 'required'
 			),
 			array(
 					 'title.required' 			=> 'Discount title is required'
@@ -190,12 +190,15 @@ class DiscountController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		if(Discount::destroy($id))
+			return Response::json(array('success'=>true));
+		else
+			return Response::json(array('success'=>false));
 	}
 
 	public function items($id){
 		$this->data['discount'] = Discount::find($id);
-		return View::make('discount_item_list',$this->data);
+		return View::make('discount.items',$this->data);
 	}
 
 

@@ -15,8 +15,8 @@ function getUploadedImageurl($type,$image_name){
                 $image_url->mediumUrl   = $base_url.'/medium/'.$image_name;
                 $image_url->largeUrl    = $base_url.'/large/'.$image_name;
         }else{
-                $image_url->url         = url('assets/images/noimage.jpg');
-                $image_url->thumbUrl    = url('assets/images/noimage.jpg');
+                $image_url->url         = url('assets/img/no-image.gif');
+                $image_url->thumbUrl    = url('assets/img/no-image.gif');
         }
         return $image_url;
 }
