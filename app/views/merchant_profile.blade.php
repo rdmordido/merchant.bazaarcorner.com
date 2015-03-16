@@ -62,7 +62,7 @@
 	                    <td>
 	                        <div class="form-group" style="margin:0px;">
 	                            <label style="display:none;" class="control-label" for="address"></label>
-	                            <input id="address" name="address" class="form-control" placeholder="usiness address" value="{{Auth::user()->address}}"/>
+	                            <input id="address" name="address" class="form-control" placeholder="business address" value="{{Auth::user()->address}}"/>
 	                        </div>
 	                    </td>
 	                </tr>

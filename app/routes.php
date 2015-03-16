@@ -10,8 +10,8 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-//Route::get('register','MerchantController@showMerchantCreate');
-//Route::post('merchant/create','MerchantController@create');
+Route::get('register','MerchantController@showMerchantCreate');
+Route::post('merchant/create','MerchantController@create');
 Route::get('login','MerchantController@showMerchantLogin');
 Route::post('login','MerchantController@login');
 Route::get('logout','MerchantController@logout');

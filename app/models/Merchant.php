@@ -19,27 +19,24 @@ class Merchant extends Eloquent implements UserInterface, RemindableInterface {
 								);	
 
 	public function store($data){
-		/*
-		$merchant 		= new User();
-		$merchant_data 	= array(
-			 'role_id' 		=> 2
-			,'username' 	=> $data['username']
-			,'password' 	=> $data['password']
-			,'email' 		=> $data['email']
-		);
-		$new_user = $merchant->store($merchant_data);
-		if($new_user){
-			$new_merchant 			= new Merchant();
-			$new_merchant->name 	= $data['name'];
-			$new_merchant->user_id 	= $new_user->id;
-			if($new_merchant->save())
-				return $new_merchant;
-			else
-				return false;
+
+		$merchant 				= new Merchant();
+		$merchant->name 		= $data['name'];
+		$merchant->username 	= $data['username'];
+		$merchant->password 	= Hash::make($data['password']);
+		$merchant->email 		= $data['email'];
+		$merchant->address 		= (isset($data['address']) && !empty($data['address'])) 	? $data['address'] 	: null;
+		$merchant->website 		= (isset($data['website']) && !empty($data['website'])) 	? $data['website'] 	: null;
+		$merchant->phone 		= (isset($data['phone']) && !empty($data['phone'])) 		? $data['phone'] 	: null;
+		$merchant->facebook 	= (isset($data['facebook']) && !empty($data['facebook'])) 	? $data['facebook'] : null;
+		$merchant->twitter 		= (isset($data['twitter']) && !empty($data['twitter'])) 	? $data['twitter'] 	: null;
+
+		if($merchant->save()){
+			return $merchant;
 		}else{
 			return false;
 		}
-		*/
+		
 	}
 
 	public function edit($merchant_data){
@@ -80,3 +77,4 @@ class Merchant extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 }
+
