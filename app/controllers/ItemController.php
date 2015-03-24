@@ -45,6 +45,7 @@ class ItemController extends \BaseController {
 					 'name' 				=> (isset($data['item_name'])) 				? $data['item_name'] 			: ''
 					,'description' 			=> (isset($data['item_description'])) 		? $data['item_description'] 	: ''
 					,'price' 				=> (isset($data['item_price'])) 			? $data['item_price'] 			: ''
+					,'discount_id' 			=> (isset($data['item_discount'])) 			? $data['item_discount'] 		: ''
 					,'brand_id' 			=> (isset($data['item_brand'])) 			? $data['item_brand'] 			: ''
 					,'item_main_category' 	=> (isset($data['item_main_category'])) 	? $data['item_main_category'] 	: ''
 					,'item_sub_category' 	=> (isset($data['item_sub_category'])) 		? $data['item_sub_category'] 	: ''

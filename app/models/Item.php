@@ -51,6 +51,7 @@ class Item extends Eloquent{
 		$new_item->merchant_id 	= Auth::user()->id;
 		$new_item->name 		= $item['name'];
 		$new_item->price 		= $item['price'];
+		$new_item->discount_id 	= (isset($item['discount_id']) && !empty($item['discount_id'])) ? $item['discount_id'] 	: null;
 		$new_item->brand_id 	= (isset($item['brand_id']) && !empty($item['brand_id'])) 		? $item['brand_id'] 	: null;
 		$new_item->description 	= (isset($item['description']) && !empty($item['description'])) ? $item['description'] 	: null;
 		$new_item->sku 			= $this->generateSKU();

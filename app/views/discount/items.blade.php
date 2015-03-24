@@ -88,7 +88,12 @@
                                                 <td>{{$item->brand->name or 'None'}}</td>
                                                 <td>{{$item->getItemMainCategory()->name}}</td>
                                                 <td>{{$item->getItemSubCategory()->name or 'None'}}</td>
-                                                <td class="center"></td>
+                                                <td class="center">
+                                                    <div class="btn-group" role="group">
+                                                        <button type="button" class="btn btn-sm btn-default" onClick="window.location='{{url("item/$item->id")}}'"><i class="fa fa-search"></i> View</button>
+                                                        <button type="button" class="btn btn-sm btn-default" onClick="window.location='{{url("item/$item->id/edit")}}'"><i class="fa fa-edit"></i> Update</button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>

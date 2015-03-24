@@ -31,7 +31,7 @@
 	                </tr>
 	                <tr>
 	                    <td style="vertical-align:middle;"><label>Discount</label></td>
-	                    <td>{{$item->discount->name or 'None'}}</td>
+	                    <td>{{$item->discount->title or 'None'}}</td>
 	                </tr>
 	                <tr>
 	                    <td style="vertical-align:middle;"><label>Main Category</label></td>
